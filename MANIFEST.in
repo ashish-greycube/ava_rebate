@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include ava_rebate *.css
+recursive-include ava_rebate *.csv
+recursive-include ava_rebate *.html
+recursive-include ava_rebate *.ico
+recursive-include ava_rebate *.js
+recursive-include ava_rebate *.json
+recursive-include ava_rebate *.md
+recursive-include ava_rebate *.png
+recursive-include ava_rebate *.py
+recursive-include ava_rebate *.svg
+recursive-include ava_rebate *.txt
+recursive-exclude ava_rebate *.pyc
