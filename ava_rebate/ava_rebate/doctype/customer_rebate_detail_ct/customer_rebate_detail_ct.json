@@ -1,0 +1,45 @@
+{
+ "creation": "2020-01-28 12:12:38.637688",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "sales_amount",
+  "rebate_amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sales_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Sales Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "rebate_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Rebate Amount",
+   "reqd": 1
+  }
+ ],
+ "istable": 1,
+ "modified": "2020-01-28 12:12:38.637688",
+ "modified_by": "Administrator",
+ "module": "Ava Rebate",
+ "name": "Customer Rebate Detail CT",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "ASC",
+ "track_changes": 1
+}

@@ -1,0 +1,45 @@
+{
+ "creation": "2020-01-28 12:02:02.973790",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "from_amount",
+  "to_amount",
+  "rebate_percentage"
+ ],
+ "fields": [
+  {
+   "fieldname": "from_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "From Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "to_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "To Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "rebate_percentage",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "label": "Rebate Percentage",
+   "reqd": 1
+  }
+ ],
+ "istable": 1,
+ "modified": "2020-01-28 12:02:02.973790",
+ "modified_by": "Administrator",
+ "module": "Ava Rebate",
+ "name": "Rebate Slab CT",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
