@@ -40,21 +40,26 @@ class CustomerRebate(Document):
 			cond+=" and si.customer ='"+customer+"'"
 
 		#normal_customer
-		normal_customer_rebate_data = frappe.db.sql(""" select si.customer,sum(si.base_net_total) as sales_amount,
-			((total*rebate_percentage)/100)+fixed_rebate as rebate_amount
-			from `tabSales Invoice` si
-			INNER JOIN `tabCustomer` cust ON si.customer=cust.name
-			INNER JOIN `tabRebate Group CT` rg  ON cust.rebate_group_cf=rg.name
-			INNER JOIN `tabRebate Slab CT` rslab ON rg.name=rslab.parent
-			where 
-			si.is_rebate_processed_cf=0
-			and si.docstatus=1
-			and si.status='Paid'
-			and cust.parent_customer_cf is null
-			and cust.rebate_group_cf is not null
-			and cust.is_parent_customer_cf!=1
-			and total BETWEEN rslab.from_amount AND rslab.to_amount 
-			{cond} group by si.customer""".format(cond=cond), as_dict=1)
+		normal_customer_rebate_data = frappe.db.sql(""" select t.customer, t.total as sales_amount, ((t.total*rslab.rebate_percentage)/100)+t.fixed_rebate as rebate_amount
+from
+(   select si.customer,sum(si.base_net_total) as total, rg.name as rgroup,rg.fixed_rebate
+    from `tabSales Invoice` si
+    INNER JOIN `tabCustomer` cust ON si.customer=cust.name
+    INNER JOIN `tabRebate Group CT` rg  ON cust.rebate_group_cf=rg.name
+    where 
+    si.is_rebate_processed_cf=0
+    and si.docstatus=1
+    and si.status='Paid'
+    and cust.parent_customer_cf is null
+    and cust.rebate_group_cf is not null
+    and cust.is_parent_customer_cf!=1
+    {cond}
+   group by si.customer
+) t
+INNER JOIN `tabRebate Slab CT` rslab 
+on t.rgroup=rslab.parent
+and t.total BETWEEN rslab.from_amount AND rslab.to_amount 
+   """.format(cond=cond), as_dict=1)
 
 
 
