@@ -8,8 +8,8 @@
   "from_date",
   "to_date",
   "column_break_3",
-  "customer",
   "customer_group",
+  "customer",
   "get_sales_invoices",
   "sb1",
   "customer_rebate_detail",
@@ -82,13 +82,15 @@
   },
   {
    "fieldname": "total_amount",
-   "fieldtype": "Read Only",
-   "label": "Total Sales Amount "
+   "fieldtype": "Currency",
+   "label": "Total Sales Amount ",
+   "read_only": 1
   },
   {
    "fieldname": "total_discount",
-   "fieldtype": "Read Only",
-   "label": "Total Rebate Amount"
+   "fieldtype": "Currency",
+   "label": "Total Rebate Amount",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_12",
@@ -130,7 +132,7 @@
  "hide_toolbar": 1,
  "in_create": 1,
  "issingle": 1,
- "modified": "2020-01-28 12:15:11.091544",
+ "modified": "2020-01-29 14:43:27.105510",
  "modified_by": "Administrator",
  "module": "Ava Rebate",
  "name": "Customer Rebate",
