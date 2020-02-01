@@ -18,9 +18,18 @@ frappe.ui.form.on('Customer Rebate', {
 			doc: frm.doc,
 			method: 'fill_customer_rebate_details',
 			callback: function(r) {
-				if(r.message=='true')
 				console.log(r)
-				frm.refresh();
+				if(r.message=='true'){
+					
+					frm.refresh();
+				}
+				else{
+					frm.set_value("total_amount", 0);
+					frm.set_value("total_discount", 0);
+					frm.set_value("customer_rebate_detail", "");
+					frappe.msgprint(__('No customers found for the mentioned criteria'))
+				}
+
 			}
 		})
 	},
@@ -41,7 +50,7 @@ frappe.ui.form.on('Customer Rebate', {
 				setTimeout(function() { 
 					let si='';
 					frappe.msgprint(__('Journal Entry {0} is submitted.',['<a href="#Form/Journal%20Entry/'+r.message[0]+'">' + r.message[0]+ '</a>']));
-					frappe.msgprint(__('{0} invoices are updated as paid.',[r.message[1]]));
+					// frappe.msgprint(__('{0} invoices are updated as paid.',[r.message[1]]));
 				}, 100);
 				console.log(r)
 			}

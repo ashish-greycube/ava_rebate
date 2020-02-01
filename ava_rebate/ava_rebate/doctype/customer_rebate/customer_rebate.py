@@ -8,7 +8,7 @@ from frappe.model.document import Document
 from frappe import _
 from erpnext.accounts.general_ledger import make_gl_entries
 from frappe.email import sendmail_to_system_managers
-from frappe.utils import today
+from frappe.utils import nowdate,getdate
 from erpnext.accounts.utils import get_balance_on, get_account_currency
 
 class CustomerRebate(Document):
@@ -22,10 +22,10 @@ class CustomerRebate(Document):
 		"voucher_type":"Journal Entry",
 		"is_opening":"No",
 		"remark":" Customer rebate paid against period {from_date} to {to_date}.".format(from_date=self.from_date,to_date=self.to_date) + "\n List of updated sales invoices are:\n"+si_list,
-		"title":"Customer Rebate from {from_date} to {to_date}".format(from_date=self.from_date,to_date=self.to_date),
+		"title":"Rebate from {from_date} to {to_date}".format(from_date=self.from_date,to_date=self.to_date),
 		"total_debit":self.total_discount,
 		"total_credit":self.total_discount,
-		"posting_date":today(),
+		"posting_date":getdate(nowdate()),
 		"account_currency":default_currency,
 		}
 
@@ -220,7 +220,8 @@ and t.total BETWEEN rslab.from_amount AND rslab.to_amount
 
 
 		if not normal_customer_rebate_data and not group_customer_rebate_data:
-			frappe.throw(_("No customers found for the mentioned criteria"))
+			
+			return False
 
 		for customer in normal_customer_rebate_data:
 			total_amount+=customer.sales_amount
