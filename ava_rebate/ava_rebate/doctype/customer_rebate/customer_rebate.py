@@ -10,6 +10,8 @@ from erpnext.accounts.general_ledger import make_gl_entries
 from frappe.email import sendmail_to_system_managers
 from frappe.utils import nowdate,getdate
 from erpnext.accounts.utils import get_balance_on, get_account_currency
+from frappe.utils.data import formatdate
+
 
 class CustomerRebate(Document):
 
@@ -17,12 +19,13 @@ class CustomerRebate(Document):
 
 		default_currency=frappe.get_value('Company', self.company, 'default_currency')
 		cost_center= self.cost_center or frappe.get_cached_value('Company',  self.company,  "cost_center")
+		date_format=frappe.db.get_single_value('System Settings', 'date_format')
 		jv_main={
 		"company":self.company,
 		"voucher_type":"Journal Entry",
 		"is_opening":"No",
-		"remark":" Customer rebate paid against period {from_date} to {to_date}.".format(from_date=self.from_date,to_date=self.to_date) + "\n List of updated sales invoices are:\n"+si_list,
-		"title":"Rebate from {from_date} to {to_date}".format(from_date=self.from_date,to_date=self.to_date),
+		"remark":" Customer rebate paid against period {from_date} to {to_date}.".format(from_date=formatdate(self.from_date,date_format),to_date=formatdate(self.to_date,date_format)) + "\n List of updated sales invoices are:\n"+si_list,
+		"title":"Rebate from {from_date} to {to_date}".format(from_date=formatdate(self.from_date,date_format),to_date=formatdate(self.to_date,date_format)),
 		"total_debit":self.total_discount,
 		"total_credit":self.total_discount,
 		"posting_date":getdate(nowdate()),
@@ -101,7 +104,8 @@ class CustomerRebate(Document):
 			and si.status='Paid'
 			and cust.is_parent_customer_cf!=1
 	{cond}""".format(cond=cond), as_dict=1)
-
+		if len(impacted_sales_invoice_data)==0:
+			frappe.throw(_("Something went wrong.. No Sales invoice are found matching above criteria."))
 		si_list=''
 		for si in impacted_sales_invoice_data:
 			si_list+=si.name+' '
