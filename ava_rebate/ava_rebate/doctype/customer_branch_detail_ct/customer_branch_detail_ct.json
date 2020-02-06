@@ -1,0 +1,63 @@
+{
+ "creation": "2020-02-06 07:09:45.742993",
+ "description": "Customer Branch Linking Detail Table",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer_branch",
+  "customer_group",
+  "column_break_3",
+  "territory",
+  "industry_type"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer_branch",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer Branch",
+   "options": "Customer Branch CT",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_group",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer Group",
+   "options": "Customer Group",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "territory",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Territory",
+   "options": "Territory",
+   "reqd": 1
+  },
+  {
+   "fieldname": "industry_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Industry Type",
+   "options": "Industry Type",
+   "reqd": 1
+  }
+ ],
+ "istable": 1,
+ "modified": "2020-02-06 07:09:45.742993",
+ "modified_by": "Administrator",
+ "module": "Ava Rebate",
+ "name": "Customer Branch Detail CT",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -1,41 +1,27 @@
 {
- "autoname": "field:rebate_group",
- "creation": "2020-01-28 12:02:38.114576",
- "description": "Rebate Group & Slabs defined here",
+ "autoname": "field:customer_branch",
+ "creation": "2020-02-06 07:07:45.100082",
+ "description": "Customer Branch",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "rebate_group",
-  "fixed_rebate_percent",
-  "rebate_slab"
+  "customer_branch"
  ],
  "fields": [
   {
-   "fieldname": "rebate_group",
+   "fieldname": "customer_branch",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Rebate Group",
+   "label": "Customer Branch",
    "reqd": 1,
    "unique": 1
-  },
-  {
-   "fieldname": "rebate_slab",
-   "fieldtype": "Table",
-   "label": "Rebate Slab",
-   "options": "Rebate Slab CT"
-  },
-  {
-   "default": "0",
-   "fieldname": "fixed_rebate_percent",
-   "fieldtype": "Percent",
-   "label": "Fixed Rebate Percent"
   }
  ],
- "modified": "2020-02-06 08:08:13.422237",
+ "modified": "2020-02-06 07:07:45.100082",
  "modified_by": "Administrator",
  "module": "Ava Rebate",
- "name": "Rebate Group CT",
+ "name": "Customer Branch CT",
  "owner": "Administrator",
  "permissions": [
   {
@@ -63,15 +49,19 @@
    "write": 1
   },
   {
+   "create": 1,
+   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,
    "read": 1,
    "report": 1,
    "role": "Accounts User",
-   "share": 1
+   "share": 1,
+   "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "track_changes": 1
