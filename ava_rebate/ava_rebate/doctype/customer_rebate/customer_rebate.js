@@ -5,6 +5,8 @@ frappe.ui.form.on('Customer Rebate', {
 	onload: function (frm) {
 		frm.get_field("customer_rebate_detail").grid.cannot_add_rows = true;
 		frm.set_value("from_date", frappe.datetime.month_start());
+		let to_date=frappe.datetime.get_today();
+		frm.set_value("to_date", to_date);
 		frm.set_query('customer', () => {
 			return {
 				filters: {
@@ -18,9 +20,7 @@ frappe.ui.form.on('Customer Rebate', {
 			doc: frm.doc,
 			method: 'fill_customer_rebate_details',
 			callback: function(r) {
-				console.log(r)
-				if(r.message=='true'){
-					
+				if(r.message===true){
 					frm.refresh();
 				}
 				else{
