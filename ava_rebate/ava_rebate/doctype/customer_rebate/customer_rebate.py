@@ -101,7 +101,6 @@ class CustomerRebate(Document):
 			where 
 			si.is_rebate_processed_cf=0
 			and si.docstatus=1
-			and si.status='Paid'
 	{cond}""".format(cond=cond), as_dict=1)
 		if len(impacted_sales_invoice_data)==0:
 			frappe.throw(_("Something went wrong.. No Sales invoice are found matching above criteria."))
@@ -162,7 +161,6 @@ from
     where 
     si.is_rebate_processed_cf=0
     and si.docstatus=1
-    and si.status='Paid'
     and cust.rebate_group_cf is not null
     {cond}
    group by si.customer
