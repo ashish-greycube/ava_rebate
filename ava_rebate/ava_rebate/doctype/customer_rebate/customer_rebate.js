@@ -7,13 +7,18 @@ frappe.ui.form.on('Customer Rebate', {
 		frm.set_value("from_date", frappe.datetime.month_start());
 		let to_date=frappe.datetime.get_today();
 		frm.set_value("to_date", to_date);
-		frm.set_query('customer', () => {
-			return {
-				filters: {
-					"is_parent_customer_cf":0
-				}
-			}
-		})		
+		// frm.set_query('customer', () => {
+		// 	return {
+		// 		filters: {
+		// 			"is_parent_customer_cf":0
+		// 		}
+		// 	}
+		// })
+		frm.set_value("total_amount","");
+		frm.set_value("total_discount","");
+		frm.doc.customer_rebate_detail=[];
+		frm.refresh_field("customer_rebate_detail");
+
 	},
 	get_sales_invoices: function (frm) {
 		return frappe.call({
