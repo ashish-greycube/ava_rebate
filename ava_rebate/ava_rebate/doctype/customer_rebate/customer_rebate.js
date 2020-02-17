@@ -15,6 +15,8 @@ frappe.ui.form.on('Customer Rebate', {
 		// 	}
 		// })
 		frm.set_value("total_amount","");
+		frm.set_value("customer","");
+		frm.set_value("customer_group", 'All Customer Groups');
 		frm.set_value("total_discount","");
 		frm.doc.customer_rebate_detail=[];
 		frm.refresh_field("customer_rebate_detail");
@@ -66,7 +68,7 @@ frappe.ui.form.on('Customer Rebate', {
 			return {
 				filters: {
 					"customer_group": frm.doc.customer_group,
-					"is_parent_customer_cf":0
+					// "is_parent_customer_cf":0
 				}
 			}
 		})
