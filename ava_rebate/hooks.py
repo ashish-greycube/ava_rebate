@@ -30,7 +30,7 @@ doctype_js = {
 	"Sales Invoice" : "public/js/sales_invoice.js",
 	"Sales Order" : "public/js/sales_order.js",
 	"Delivery Note" : "public/js/delivery_note.js",
-	"Customer" : "public/js/customer.js"
+	"Customer" : "public/js/customer.js",
 	}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -84,13 +84,11 @@ doctype_js = {
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-#	}
-# }
+doc_events = {
+	"Payment Entry": {
+		"before_validate": "ava_rebate.api.override_set_missing_values"
+	}
+}
 
 # Scheduled Tasks
 # ---------------
@@ -121,10 +119,10 @@ doctype_js = {
 # Overriding Methods
 # ------------------------------
 #
-# override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "ava_rebate.event.get_events"
-# }
-#
+override_whitelisted_methods = {
+	"erpnext.accounts.doctype.payment_entry.payment_entry.get_party_details": "ava_rebate.api.get_party_details"
+}
+
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
 # along with any modifications made in other Frappe apps
