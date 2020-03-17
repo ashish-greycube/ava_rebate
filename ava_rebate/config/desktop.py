@@ -9,6 +9,6 @@ def get_data():
 			"color": "#95ddf5",
 			"icon": "octicon octicon-law",
 			"type": "module",
-			"label": _("Ava Rebate")
+			"label": _("Ava Custom App")
 		}
 	]
