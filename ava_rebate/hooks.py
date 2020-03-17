@@ -130,3 +130,6 @@ override_whitelisted_methods = {
 # 	"Task": "ava_rebate.task.get_dashboard_data"
 # }
 
+fixtures = ['Party Type']
+# $ bench --site mysite export-fixtures
+# This file will be automatically imported when the app is installed in a new site or updated via bench update.
