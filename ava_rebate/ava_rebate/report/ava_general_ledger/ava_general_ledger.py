@@ -169,10 +169,36 @@ def get_conditions(filters):
 		conditions.append("party_type in ('Customer', 'Supplier')")
 
 	if filters.get("party_type"):
-		conditions.append("party_type=%(party_type)s")
+		if filters["party_type"]=='Customer Group' and filters.get("party"):
+			print(filters["party"])
+			lft, rgt = frappe.db.get_value("Customer Group", filters["party"], ['lft', 'rgt'])
+			get_parent_customer_groups=frappe.db.sql("""select name from `tabCustomer Group` where lft >= %s and rgt <= %s""", (lft, rgt), as_dict=1)
+			customer_groups = ["%s"%(frappe.db.escape(d.name)) for d in get_parent_customer_groups]
+			if customer_groups:
+				customer_group_condition = ",".join(['%s'] * len(customer_groups))%(tuple(customer_groups))
+				condition="{0} in ({1})".format('and si.customer_group', customer_group_condition)
+				cond+=condition
+
+			from frappe.desk.treeview import get_children
+			# customer_groups = [d.value for d in get_children("Customer Group", filters["party"])] 
+			# if customer_groups == []:
+				# customer_groups=filters["party"]
+			# filters["party"]=frappe.db.sql(""" select name from `tabCustomer` where docstatus < 2 and customer_group in ({0})""".format(', '.join(['"{0}"'.format(d.value) for d in get_children("Customer Group", filters["party"])])))
+			print('vvvv-----------',filters["party"])
+			customer_group = [d for d in filters["party"]]
+			filters["party"]=frappe.db.sql(""" select name from `tabCustomer` where docstatus < 2 and customer_group = %s """,customer_group,as_list=1)
+			print('------',filters["party"])
+			conditions.append("party_type=%(party_type)s")
+			
+		else:
+			conditions.append("party_type=%(party_type)s")
+
+
 
 	if filters.get("party"):
 		conditions.append("party in %(party)s")
+
+
 
 	if not (filters.get("account") or filters.get("party") or
 		filters.get("group_by") in ["Group by Account", "Group by Party"]):
