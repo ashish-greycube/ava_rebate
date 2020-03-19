@@ -85,6 +85,12 @@ frappe.query_reports["Ava General Ledger"] = {
 				var party_type = frappe.query_report.get_filter_value('party_type');
 				var parties = frappe.query_report.get_filter_value('party');
 
+
+				if(party_type=== "Customer Group" && parties.length > 1) {
+					frappe.msgprint('Mutli Selection is not allowed for Customer Group')
+					frappe.query_report.setup_filters()
+					return;
+				}
 				if(!party_type || parties.length === 0 || parties.length > 1) {
 					frappe.query_report.set_filter_value('party_name', "");
 					frappe.query_report.set_filter_value('tax_id', "");
