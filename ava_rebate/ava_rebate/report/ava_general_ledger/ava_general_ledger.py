@@ -167,7 +167,6 @@ def get_conditions(filters):
 
 	if filters.get("group_by") == "Group by Party" and not filters.get("party_type"):
 		conditions.append("party_type in ('Customer', 'Supplier')")
-	print('before------',filters.get("party"),filters.get("party_type"))
 	if filters.get("party_type"):
 		if filters["party_type"]=='Customer Group' and filters.get("party"):
 			lft, rgt = frappe.db.get_value("Customer Group", filters["party"][0], ['lft', 'rgt'])
@@ -180,9 +179,8 @@ def get_conditions(filters):
 				cond+=condition
 
 			customer_list=frappe.db.sql(""" select name from `tabCustomer` where docstatus < 2 {cond} """.format(cond=cond), as_list=1)
-			print(customer_list,len(customer_list))
 			if len(customer_list)>0:
-				filters["party"]= customer_list[0]
+				filters["party"]= customer_list
 			else:
 				filters["party"]=['1']
 			
@@ -195,9 +193,6 @@ def get_conditions(filters):
 
 	if filters.get("party"):
 		conditions.append("party in %(party)s")
-
-	print('after------',filters.get("party"),filters.get("party_type"))
-
 
 	if not (filters.get("account") or filters.get("party") or
 		filters.get("group_by") in ["Group by Account", "Group by Party"]):
