@@ -84,11 +84,11 @@ doctype_js = {
 # ---------------
 # Hook on document methods and events
 
-doc_events = {
-	"Payment Entry": {
-		"before_validate": "ava_rebate.api.override_set_missing_values"
-	}
-}
+# doc_events = {
+# 	"Payment Entry": {
+# 		"before_validate": "ava_rebate.api.override_set_missing_values"
+# 	}
+# }
 
 # Scheduled Tasks
 # ---------------
@@ -119,9 +119,9 @@ doc_events = {
 # Overriding Methods
 # ------------------------------
 #
-override_whitelisted_methods = {
-	"erpnext.accounts.doctype.payment_entry.payment_entry.get_party_details": "ava_rebate.api.get_party_details"
-}
+# override_whitelisted_methods = {
+# 	"erpnext.accounts.doctype.payment_entry.payment_entry.get_party_details": "ava_rebate.api.get_party_details"
+# }
 
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
@@ -130,6 +130,6 @@ override_whitelisted_methods = {
 # 	"Task": "ava_rebate.task.get_dashboard_data"
 # }
 
-fixtures = ['Party Type']
+# fixtures = ['Party Type']
 # $ bench --site mysite export-fixtures
 # This file will be automatically imported when the app is installed in a new site or updated via bench update.
